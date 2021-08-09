@@ -1,0 +1,19 @@
+These instructions describe how to setup and run a optimization of a SAM PV model usin PySAM and the evolutionary algorithm package DEAP.
+
+1. Setup a python environment with NREL-PySAM (https://nrel-pysam.readthedocs.io/en/master/GettingStarted.html) and DEAP (https://deap.readthedocs.io/en/master/). Additional packages used are json, matplotlib, pandas, ast, numpy, operator, random, and math.
+
+2. Create a PV model in traditional SAM. (If the example model from the repository is used, make sure to change the weather file path in the model to the location where you store the weather file. A SAM default weather file is available for download.
+
+3. Export the model parameters. Click on tab at the top of SAM with the name of the model you wish to export. Select "Generate Code" and then select "JSON for inputs"
+
+4. Export cost inputs. Some of the user inputs, particularly the System Costs, do not get stored when the model is exported. To export these inputs, to go "File" -> "Inputs Browser" -> "Export" -> "Send to Excel". Then save the file. Note: there is an error when saving to CSV with the column delimiter.
+
+5. Open PySAM_Optim_Particle_Swarm.py and update the filepath variables for the model_filepath and the cost_inputs_file. Also update the system_name which should match the name of the model in SAM (the name on the system tab).
+
+6. Adjust optimization parameters as desired. The learn parameter controls the level of randomness in the optimizer. A higher value will add more variability and the optimizer will converge faster. However, with a slower learning parameter, the optimizer typically is able to achieve more optimal solutions by a finer granularity search of the parameter space. The optimization_generations parameters defines the length of the simulation.
+
+7. Adjust the free model parameters. Define the min and max ranges. If you wish to use other parameters for the optimization, update the code in the SAM_run function. If more than 2 are used, add an additional dimension to the particle swarm code in the section "particle swarm - setup and run optimization"
+
+8. Run the optimization
+
+
